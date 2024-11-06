@@ -147,19 +147,25 @@ def generate_tiling_patterns(n, max_collinear=None):
                     continue
 
                 # a potential new pattern
-                new_pattern = frozenset(normalise_position(p_set | {np}))
+                new_pattern = p_set | {np}
 
                 # check if there are any k+1 points collinear
-                # where k is the limit
+                # where k is the limit on the number of collinear points allowed
                 valid = True
                 if max_collinear:
                     for grp in combinations(new_pattern, max_collinear + 1):
+                        # only need to consider those with this new point
+                        if np not in grp:
+                            continue
                         if collinear(grp):
                             valid = False
                             break
 
                 if not valid:
                     continue
+
+                # normalise its position
+                new_pattern = frozenset(normalise_position(new_pattern))
 
                 # check this is not already known under symmetry
                 is_new = True
