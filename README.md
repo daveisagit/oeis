@@ -1,11 +1,34 @@
-# oeis
+# OEIS - A377756
 
-Code for analysing integer sequences and to support contribution on OEIS for sequence A377756
+Number of connected planer graphs where all nodes lie on a triangular lattice grid and no more than 3 nodes are collinear over the underlying RxR space.
 
-First 10 terms
+## First 10 terms
+
 1, 1, 3, 6, 18, 55, 169, 477, 1245, 2750
 
-## Examples
+## Increasing the collinear limit
+
+Where **k** is the limit on the number of nodes that can be collinear.
+
+_(The last number in each row is repeated to the end of the row)_
+
+The diagonal is A000228 number of hexagonal polyominoes
+
+```text
+   |  k
+n  |        1       2       3       4       5       6       7       8
+----------------------------------------------------------------------
+ 1 |        1       
+ 2 |        0       1
+ 3 |        0       2       3
+ 4 |        0       4       6       7
+ 5 |        0       2      18      21      22
+ 6 |        0       3      55      78      81      82
+ 7 |        0       0     169     298     328     332     333
+ 8 |        0       0     477    1217    1404    1443    1447    1448
+```
+
+## Examples (k=3)
 
 Co-ordinates are expressed as cube co-ordinates
 
