@@ -1,8 +1,8 @@
 # OEIS - A377756
 
-Number of connected planer graphs where all nodes lie on a triangular lattice grid and no more than 3 nodes are collinear over the underlying RxR space.
+Number of connected planer graphs where all nodes lie on a triangular lattice grid and no more than 3 nodes are collinear over the underlying real plane.
 
-## First 10 terms
+## First terms
 
 | n     | #      |
 | -----:|-------:|
@@ -67,7 +67,7 @@ n  |        1       2       3       4       5       6       7       8       9
 
 ## Examples
 
-### Collinearity for any line in the place (k=3)
+### Collinearity for any line in the plane (k=3)
 
 Co-ordinates are expressed as cube co-ordinates
 
@@ -218,4 +218,3 @@ n=5
     @
 
 ```
-
