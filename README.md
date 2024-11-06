@@ -4,7 +4,22 @@ Number of connected planer graphs where all nodes lie on a triangular lattice gr
 
 ## First 10 terms
 
-1, 1, 3, 6, 18, 55, 169, 477, 1245, 2750
+| n     | #      |
+| -----:|-------:|
+| 1     | 1      |
+| 2     | 1      |
+| 3     | 3      |
+| 4     | 6      |
+| 5     | 18     |
+| 6     | 55     |
+| 7     | 169    |
+| 8     | 477    |
+| 9     | 1245   |
+| 10    | 2750   |
+| 11    | 5300   |
+| 12    | 8989   |
+| 13    | 12674  |
+| 14    | 14741  |
 
 ## Increasing the collinear limit
 
@@ -16,9 +31,9 @@ The diagonal is A000228 number of hexagonal polyominoes
 
 ```text
    |  k
-n  |        1       2       3       4       5       6       7       8
-----------------------------------------------------------------------
- 1 |        1       
+n  |        1       2       3       4       5       6       7       8       9
+-----------------------------------------------------------------------------
+ 1 |        1
  2 |        0       1
  3 |        0       2       3
  4 |        0       4       6       7
@@ -26,14 +41,37 @@ n  |        1       2       3       4       5       6       7       8
  6 |        0       3      55      78      81      82
  7 |        0       0     169     298     328     332     333
  8 |        0       0     477    1217    1404    1443    1447    1448
+ 9 |        0       0    1245    4974    6248    6518    6566    6571    6572
 ```
 
-## Examples (k=3)
+## Collinearity only considered along lattice lines
+
+If we only consider collinearity along the lattice lines
+then we naturally get more graphs producing a sequence that
+starts to differ from n=7 (ignoring the trivial k<=2)
+
+```text
+   |  k
+n  |        1       2       3       4       5       6       7       8       9
+-----------------------------------------------------------------------------
+ 1 |        1
+ 2 |        0       1
+ 3 |        0       2       3
+ 4 |        0       4       6       7
+ 5 |        0       3      18      21      22
+ 6 |        0       5      55      78      81      82
+ 7 |        0       1     172     298     328     332     333
+ 8 |        0       1     507    1217    1404    1443    1447    1448
+ 9 |        0       1    1460    4980    6248    6518    6566    6571    6572
+```
+
+## Examples
+
+### Collinearity for any line in the place (k=3)
 
 Co-ordinates are expressed as cube co-ordinates
 
 ```text
-
 
 ----------------------------
 n=1
@@ -180,3 +218,4 @@ n=5
     @
 
 ```
+

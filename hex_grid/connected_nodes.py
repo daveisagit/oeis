@@ -69,6 +69,19 @@ def collinear(points):
     return r == 1
 
 
+def collinear_along_lattice_lines(points):
+    """Return True if points are collinear along a lattice line
+    This is the case when one of the dimension ordinates is the same
+    for all points.
+    """
+    point_list = list(points)
+    vectors = [list(map(sub, p, point_list[0])) for p in point_list[1:]]
+    for d in range(3):
+        if all(v[d] == 0 for v in vectors):
+            return True
+    return False
+
+
 def normalise_position(points):
     """Translate the pattern to the top left in a consistent fashion
     This will allow us to identify a unique pattern by its coordinate set"""
@@ -124,7 +137,7 @@ def generate_dihedral_symmetries(points):
 
 
 @lru_cache(maxsize=None)
-def generate_tiling_patterns(n, max_collinear=None):
+def generate_tiling_patterns(n, max_collinear=None, lattice_lines_only=False):
     """Generate connected patterns of size n on the hex grid
     where there is a limit on the maximum number of collinear nodes
     over the underlying RxR space.
@@ -134,7 +147,9 @@ def generate_tiling_patterns(n, max_collinear=None):
     new_patterns = set()
 
     # for every graph of the previous size
-    for pattern in generate_tiling_patterns(n - 1, max_collinear=max_collinear):
+    for pattern in generate_tiling_patterns(
+        n - 1, max_collinear=max_collinear, lattice_lines_only=lattice_lines_only
+    ):
         p_set = frozenset(pattern)
 
         # for every node in that graph
@@ -153,13 +168,20 @@ def generate_tiling_patterns(n, max_collinear=None):
                 # where k is the limit on the number of collinear points allowed
                 valid = True
                 if max_collinear:
+
                     for grp in combinations(new_pattern, max_collinear + 1):
                         # only need to consider those with this new point
                         if np not in grp:
                             continue
-                        if collinear(grp):
-                            valid = False
-                            break
+
+                        if lattice_lines_only:
+                            if collinear_along_lattice_lines(grp):
+                                valid = False
+                                break
+                        else:
+                            if collinear(grp):
+                                valid = False
+                                break
 
                 if not valid:
                     continue
@@ -182,16 +204,50 @@ def generate_tiling_patterns(n, max_collinear=None):
     return new_patterns
 
 
-# First 7 terms
-for n in range(1, 8):
-    print(n, len(generate_tiling_patterns(n, max_collinear=3)))
+def output_table(N, lattice_lines_only=False, all_values=False):
+    """Output a table for n,k"""
+    print()
+    if lattice_lines_only:
+        print(f"Collinearity only considered along lattice lines")
+    else:
+        print(f"Collinearity for any line in the plane")
+    print("   |  k")
+    line = "n  | "
+    for n in range(1, N + 1):
+        line += f"{n:8d}"
+    print(line)
+    print("-" * len(line))
+    for n in range(1, N + 1):
+        line = f"{n:2d} | "
+        k_stop = n + 1
+        if all_values:
+            k_stop = N + 1
+        for k in range(1, k_stop):
+            cnt = len(
+                generate_tiling_patterns(
+                    n, max_collinear=k, lattice_lines_only=lattice_lines_only
+                )
+            )
+            line += f"{cnt:8d}"
+        print(line)
+    print()
+
+
+# Result tables
+output_table(8, lattice_lines_only=False)
+output_table(8, lattice_lines_only=True)
 
 # Patterns visualised
-for n in range(1, 6):
+print()
+print("Examples")
+print()
+for n in range(1, 9):
     print("----------------------------")
     print(f"n={n}")
     print("----------------------------")
-    for points in generate_tiling_patterns(n, max_collinear=3):
+    for points in generate_tiling_patterns(
+        n, max_collinear=3, lattice_lines_only=False
+    ):
         print(sorted(points))
         draw_pattern(points)
         print()
