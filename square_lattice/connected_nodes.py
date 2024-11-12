@@ -185,7 +185,7 @@ def generate_tiling_patterns(n, max_collinear=None, lattice_lines_only=False):
     return new_patterns
 
 
-def output_table(N, lattice_lines_only=False, all_values=False):
+def output_table(N, lattice_lines_only=False, all_values=False, cumulative=False):
     """Output a table for n,k"""
     print()
     if lattice_lines_only:
@@ -209,9 +209,34 @@ def output_table(N, lattice_lines_only=False, all_values=False):
                     n, max_collinear=k, lattice_lines_only=lattice_lines_only
                 )
             )
+            if not cumulative and k > 1:
+                prv = len(
+                    generate_tiling_patterns(
+                        n, max_collinear=k - 1, lattice_lines_only=lattice_lines_only
+                    )
+                )
+                cnt -= prv
+
             line += f"{cnt:8d}"
         print(line)
     print()
+
+
+def output_patterns_to_console(N, max_collinear=3, lattice_lines_only=True):
+    """Display the pattern images"""
+    print()
+    print("Examples")
+    print()
+    for n in range(1, N + 1):
+        print("----------------------------")
+        print(f"n={n}")
+        print("----------------------------")
+        for points in generate_tiling_patterns(
+            n, max_collinear=max_collinear, lattice_lines_only=lattice_lines_only
+        ):
+            print(sorted(points))
+            draw_pattern(points)
+            print()
 
 
 # Result tables
@@ -219,16 +244,4 @@ output_table(8, lattice_lines_only=False)
 output_table(8, lattice_lines_only=True)
 
 # Patterns visualised
-print()
-print("Examples")
-print()
-for n in range(1, 9):
-    print("----------------------------")
-    print(f"n={n}")
-    print("----------------------------")
-    for points in generate_tiling_patterns(
-        n, max_collinear=3, lattice_lines_only=False
-    ):
-        print(sorted(points))
-        draw_pattern(points)
-        print()
+# output_patterns_to_console(4)
