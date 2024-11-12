@@ -189,9 +189,9 @@ def output_table(N, lattice_lines_only=False, all_values=False, cumulative=False
     """Output a table for n,k"""
     print()
     if lattice_lines_only:
-        print(f"Collinearity only considered along lattice lines")
+        print(f"Collinearity only considered along rows or columns")
     else:
-        print(f"Collinearity for any line in the plane")
+        print(f"Collinearity considered for any line in the plane across tile centres")
     print("   |  k")
     line = "n  | "
     for n in range(1, N + 1):

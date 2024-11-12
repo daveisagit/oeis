@@ -1,220 +1,47 @@
-# OEIS - A377756
+# OEIS Sequence submissions
 
-Number of connected planer graphs where all nodes lie on a triangular lattice grid and no more than 3 nodes are collinear over the underlying real plane.
+This repository is for the purpose of supporting sequence submissions to [OEIS](https://oeis.org/) when proofs are offered by way of program.
 
-## First terms
+## A377941
 
-| n     | #      |
-| -----:|-------:|
-| 1     | 1      |
-| 2     | 1      |
-| 3     | 3      |
-| 4     | 6      |
-| 5     | 18     |
-| 6     | 55     |
-| 7     | 169    |
-| 8     | 477    |
-| 9     | 1245   |
-| 10    | 2750   |
-| 11    | 5300   |
-| 12    | 8989   |
-| 13    | 12674  |
-| 14    | 14741  |
-
-## Increasing the collinear limit
-
-Where **k** is the limit on the number of nodes that can be collinear.
-
-_(The last number in each row is repeated to the end of the row)_
-
-The diagonal is A000228 number of hexagonal polyominoes
+T(n,k) = number of free polyominoes with n cells, where the maximum number of cells in any row or column is k.
 
 ```text
+Collinearity considered for any line in the plane across tile centres
    |  k
-n  |        1       2       3       4       5       6       7       8       9
------------------------------------------------------------------------------
+n  |        1       2       3       4       5       6       7       8
+---------------------------------------------------------------------
  1 |        1
  2 |        0       1
- 3 |        0       2       3
- 4 |        0       4       6       7
- 5 |        0       2      18      21      22
- 6 |        0       3      55      78      81      82
- 7 |        0       0     169     298     328     332     333
- 8 |        0       0     477    1217    1404    1443    1447    1448
- 9 |        0       0    1245    4974    6248    6518    6566    6571    6572
+ 3 |        0       1       1
+ 4 |        0       2       2       1
+ 5 |        0       0       9       2       1
+ 6 |        0       0      18      13       3       1
+ 7 |        0       0      37      48      19       3       1
+ 8 |        0       0      62     200      77      25       4       1
 ```
 
-## Collinearity only considered along lattice lines
+## A377942
 
-If we only consider collinearity along the lattice lines
-then we naturally get more graphs producing a sequence that
-starts to differ from n=7 (ignoring the trivial k<=2)
+T(n,k) = number of free polyominoes with n cells, where the maximum number of collinear tile centers on any line in the plane is k.
 
 ```text
+Collinearity only considered along rows or columns
    |  k
-n  |        1       2       3       4       5       6       7       8       9
------------------------------------------------------------------------------
+n  |        1       2       3       4       5       6       7       8
+---------------------------------------------------------------------
  1 |        1
  2 |        0       1
- 3 |        0       2       3
- 4 |        0       4       6       7
- 5 |        0       3      18      21      22
- 6 |        0       5      55      78      81      82
- 7 |        0       1     172     298     328     332     333
- 8 |        0       1     507    1217    1404    1443    1447    1448
- 9 |        0       1    1460    4980    6248    6518    6566    6571    6572
+ 3 |        0       1       1
+ 4 |        0       2       2       1
+ 5 |        0       1       8       2       1
+ 6 |        0       1      17      13       3       1
+ 7 |        0       1      39      45      19       3       1
+ 8 |        0       1      79     182      77      25       4       1
 ```
 
-## Examples
+## In the Pipeline
 
-### Collinearity for any line in the plane (k=3)
+Having learnt the ropes a little bit more on the submission process, I think my initial submission A377756 should be cancelled.
 
-Co-ordinates are expressed as cube co-ordinates
-
-```text
-
-----------------------------
-n=1
-----------------------------
-[(0, 0, 0)]
-@
-
-----------------------------
-n=2
-----------------------------
-[(0, 0, 0), (1, 0, -1)]
-@ @
-
-----------------------------
-n=3
-----------------------------
-[(-1, 1, 0), (0, 0, 0), (0, 1, -1)]
- @
-@ @
-
-[(0, 0, 0), (1, 0, -1), (2, 0, -2)]
-@ @ @
-
-[(0, 0, 0), (0, 1, -1), (1, 1, -2)]
-@
- @ @
-
-----------------------------
-n=4
-----------------------------
-[(-1, 2, -1), (0, 0, 0), (0, 1, -1), (1, 1, -2)]
-@
- @ @
-@
-
-[(0, 0, 0), (0, 1, -1), (1, 1, -2), (2, 1, -3)]
-@
- @ @ @
-
-[(-2, 2, 0), (-1, 1, 0), (-1, 2, -1), (0, 0, 0)]
-  @
- @
-@ @
-
-[(-1, 1, 0), (0, 0, 0), (0, 1, -1), (1, 0, -1)]
- @ @
-@ @
-
-[(0, 0, 0), (0, 1, -1), (1, 1, -2), (2, 0, -2)]
-@   @
- @ @
-
-[(0, 0, 0), (0, 1, -1), (1, 1, -2), (1, 2, -3)]
-@
- @ @
-    @
-
-----------------------------
-n=5
-----------------------------
-[(0, 0, 0), (0, 1, -1), (1, 1, -2), (2, 1, -3), (3, 0, -3)]
-@     @
- @ @ @
-
-[(0, 0, 0), (0, 1, -1), (1, 1, -2), (2, 0, -2), (2, 1, -3)]
-@   @
- @ @ @
-
-[(-1, 1, 0), (-1, 2, -1), (0, 0, 0), (0, 2, -2), (1, 2, -3)]
- @
-@
- @ @ @
-
-[(-1, 2, -1), (0, 0, 0), (0, 1, -1), (1, 1, -2), (2, 1, -3)]
-@
- @ @ @
-@
-
-[(-1, 2, -1), (0, 0, 0), (0, 1, -1), (0, 2, -2), (1, 0, -1)]
-@ @
- @
-@ @
-
-[(-1, 1, 0), (-1, 2, -1), (0, 0, 0), (0, 2, -2), (1, 1, -2)]
- @
-@   @
- @ @
-
-[(0, 0, 0), (0, 1, -1), (0, 2, -2), (1, 1, -2), (2, 1, -3)]
-@
- @ @ @
-  @
-
-[(0, 0, 0), (0, 1, -1), (1, 0, -1), (1, 1, -2), (2, 1, -3)]
-@ @
- @ @ @
-
-[(-1, 2, -1), (0, 0, 0), (0, 1, -1), (1, 1, -2), (2, 0, -2)]
-@   @
- @ @
-@
-
-[(0, 0, 0), (1, 0, -1), (1, 1, -2), (2, 1, -3), (3, 0, -3)]
-@ @   @
-   @ @
-
-[(0, 0, 0), (0, 1, -1), (0, 2, -2), (1, 2, -3), (2, 2, -4)]
-@
- @
-  @ @ @
-
-[(0, 0, 0), (1, 0, -1), (1, 1, -2), (2, 1, -3), (2, 2, -4)]
-@ @
-   @ @
-      @
-
-[(0, 0, 0), (1, 0, -1), (1, 1, -2), (2, 1, -3), (3, 1, -4)]
-@ @
-   @ @ @
-
-[(-2, 2, 0), (-1, 1, 0), (-1, 2, -1), (0, 0, 0), (0, 1, -1)]
-  @
- @ @
-@ @
-
-[(0, 0, 0), (0, 1, -1), (1, 1, -2), (2, 1, -3), (2, 2, -4)]
-@
- @ @ @
-      @
-
-[(-1, 2, -1), (0, 0, 0), (0, 1, -1), (1, 0, -1), (1, 1, -2)]
-@ @
- @ @
-@
-
-[(-2, 2, 0), (-1, 1, 0), (-1, 2, -1), (0, 0, 0), (0, 2, -2)]
-  @
- @
-@ @ @
-
-[(0, 0, 0), (0, 1, -1), (1, 1, -2), (1, 2, -3), (2, 1, -3)]
-@
- @ @ @
-    @
-
-```
+I will submit the equivalent sequences for hexagon polyominoes if these (A377941/A377941) become accepted.
