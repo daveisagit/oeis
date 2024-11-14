@@ -214,7 +214,7 @@ def output_table(N, lattice_lines_only=False, all_values=False):
     print("   |  k")
     line = "n  | "
     for n in range(1, N + 1):
-        line += f"{n:8d}"
+        line += f"{n:5d}"
     print(line)
     print("-" * len(line))
     for n in range(1, N + 1):
@@ -228,26 +228,24 @@ def output_table(N, lattice_lines_only=False, all_values=False):
                     n, max_collinear=k, lattice_lines_only=lattice_lines_only
                 )
             )
-            line += f"{cnt:8d}"
+            line += f"{cnt:5d}"
         print(line)
     print()
 
 
 # Result tables
-output_table(8, lattice_lines_only=False)
-output_table(8, lattice_lines_only=True)
+# output_table(7, lattice_lines_only=False)
+# output_table(7, lattice_lines_only=True)
 
 # Patterns visualised
 print()
 print("Examples")
 print()
-for n in range(1, 9):
+for n in range(1, 6):
     print("----------------------------")
     print(f"n={n}")
     print("----------------------------")
-    for points in generate_tiling_patterns(
-        n, max_collinear=3, lattice_lines_only=False
-    ):
+    for points in generate_tiling_patterns(n, max_collinear=2, lattice_lines_only=True):
         print(sorted(points))
         draw_pattern(points)
         print()
