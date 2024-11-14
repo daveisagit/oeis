@@ -40,8 +40,56 @@ n  |        1       2       3       4       5       6       7       8
  8 |        0       1      79     182      77      25       4       1
 ```
 
-## In the Pipeline
+## A378014
 
-Having learnt the ropes a little bit more on the submission process, I think my initial submission A377756 should be cancelled.
+T(n,k) = number of free hexagon polyominoes with n cells, where the maximum number of cells on any lattice line is k.The term "lattice line" meaning a line running through the cell centres that is perpendicular to the hexagon cell sides.
 
-I will submit the equivalent sequences for hexagon polyominoes if these (A377941/A377941) become accepted.
+```text
+
+   |  k
+ n |       1      2      3      4      5      6      7      8      9     10       Total
+---------------------------------------------------------------------------------------
+ 1 |       1                                                                          1
+ 2 |       0      1                                                                   1
+ 3 |       0      2      1                                                            3
+ 4 |       0      4      2      1                                                     7
+ 5 |       0      3     15      3      1                                             22
+ 6 |       0      5     50     23      3      1                                      82
+ 7 |       0      1    171    126     30      4      1                              333
+ 8 |       0      1    506    710    187     39      4      1                      1448
+ 9 |       0      1   1459   3520   1268    270     48      5      1               6572
+10 |       0      1   3792  16617   7703   1948    364     59      5      1       30490
+
+The T(4,2)=4 hexagon polyominoes are:
+#         #        #   #      # #
+ # #       # #      # #      # #
+    #     #
+
+```
+
+## A378015
+
+T(n,k) = number of free hexagon polyominoes with n cells, where the maximum number of collinear cell centers on any line in the plane is k.
+
+```text
+
+   |  k
+
+ n |       1      2      3      4      5      6      7      8      9     10       Total
+---------------------------------------------------------------------------------------
+ 1 |       1                                                                          1
+ 2 |       0      1                                                                   1
+ 3 |       0      2      1                                                            3
+ 4 |       0      4      2      1                                                     7
+ 5 |       0      2     16      3      1                                             22
+ 6 |       0      3     52     23      3      1                                      82
+ 7 |       0      0    169    129     30      4      1                              333
+ 8 |       0      0    477    740    187     39      4      1                      1448
+ 9 |       0      0   1245   3729   1274    270     48      5      1               6572
+10 |       0      0   2750  17578   7785   1948    364     59      5      1       30490
+
+The T(5,2)=2 hexagon polyominoes are:
+ #          #   #
+#   #        # #
+ # #        #
+```
